@@ -18,14 +18,18 @@ Friend Class Measure
     Friend varMeasureName As String
 
     Friend varParentMeasure As Parent = Nothing
+    Friend varParentName As String
+    Friend varSkin As IntPtr
 
     Friend Sub New(api As Rainmeter.API)
         varMeasureName = api.GetMeasureName()
+        varSkin = api.GetSkin()
     End Sub
 
     Friend Sub Dispose()
         If varParentMeasure IsNot Nothing Then
             varParentMeasure.Dispose()
+            ParentsList.Remove(varParentMeasure)
             varParentMeasure = Nothing
         End If
     End Sub
@@ -50,28 +54,28 @@ Friend Class Measure
         End If
 
         Dim PathOption As String = api.ReadPath("ImagePath", "")
-        Dim ParentOption As String = api.ReadString("ParentMeasure", "", False)
+        varParentName = api.ReadString("ParentMeasure", "", False)
 
-        If Not String.IsNullOrEmpty(PathOption) And Not String.IsNullOrEmpty(ParentOption) Then
-            Rainmeter.API.Log(Rainmeter.API.LogType.Warning, "ColorExtract.dll: Both ImagePath and ParentMeasure are set, ignoring parent")
+        If Not String.IsNullOrEmpty(PathOption) And Not String.IsNullOrEmpty(varParentName) Then
+            Rainmeter.API.Log(Rainmeter.API.LogType.Debug, "ColorExtract.dll: Both ImagePath and ParentMeasure are set, ignoring parent")
         End If
 
         If Not String.IsNullOrEmpty(PathOption) Then
             If varParentMeasure Is Nothing Then
-                varParentMeasure = New Parent(varMeasureName)
+                varParentMeasure = New Parent(varMeasureName, varSkin)
                 ParentsList.Add(varParentMeasure)
             End If
             varParentMeasure.UpdatePath(PathOption)
-        ElseIf Not String.IsNullOrEmpty(ParentOption) Then
+        ElseIf Not String.IsNullOrEmpty(varParentName) Then
             varParentMeasure = Nothing
             For Each ParentCheck As Parent In ParentsList
-                If String.Format("[{0}]", ParentCheck.varMeasureName) = ParentOption Then
+                If String.Format("[{0}]", ParentCheck.varMeasureName) = varParentName And ParentCheck.varSkin = varSkin Then
                     varParentMeasure = ParentCheck
                     Exit For
                 End If
             Next
         Else
-            Rainmeter.API.Log(Rainmeter.API.LogType.Error, "ColorExtract.dll: Neither ImagePath nor ParentMeasure are set")
+            Rainmeter.API.Log(Rainmeter.API.LogType.Debug, "ColorExtract.dll: Neither ImagePath nor ParentMeasure are set (" & varMeasureName & ")")
             varParentMeasure = Nothing
         End If
     End Sub
@@ -79,6 +83,16 @@ Friend Class Measure
     Friend Function Update() As Double
         If varParentMeasure IsNot Nothing AndAlso varParentMeasure.varMeasureName = Me.varMeasureName Then
             varParentMeasure.Update()
+        ElseIf varParentMeasure Is Nothing And Not String.IsNullOrEmpty(varParentName) Then
+            'In testing, if Dynamic Variables was set on the parent, then it wouldn't be able to create the Parent class
+            'on the first run, but would properly update after everything else had been loaded. Let's give the child
+            'measures a chance to find their parent after it's had a chance to get created.
+            For Each ParentCheck As Parent In ParentsList
+                If String.Format("[{0}]", ParentCheck.varMeasureName) = varParentName And ParentCheck.varSkin = varSkin Then
+                    varParentMeasure = ParentCheck
+                    Exit For
+                End If
+            Next
         End If
 
         Return 0.0
@@ -105,9 +119,11 @@ Friend Class Parent
     Friend varAccent2 As Color = Color.White
 
     Friend varMeasureName As String
+    Friend varSkin As IntPtr
 
-    Friend Sub New(pMeasureName As String)
+    Friend Sub New(pMeasureName As String, pSkin As IntPtr)
         varMeasureName = pMeasureName
+        varSkin = pSkin
     End Sub
 
     Friend Sub UpdatePath(pImagePath As String)
