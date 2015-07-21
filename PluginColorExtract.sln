@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "PluginColorExtract", "PluginColorExtract\PluginColorExtract.vbproj", "{71BD4B99-D9F4-4E29-8EF9-B4BB86629CBC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{71BD4B99-D9F4-4E29-8EF9-B4BB86629CBC}.Debug|x64.ActiveCfg = Debug|x64
+		{71BD4B99-D9F4-4E29-8EF9-B4BB86629CBC}.Debug|x64.Build.0 = Debug|x64
+		{71BD4B99-D9F4-4E29-8EF9-B4BB86629CBC}.Debug|x86.ActiveCfg = Debug|x86
+		{71BD4B99-D9F4-4E29-8EF9-B4BB86629CBC}.Debug|x86.Build.0 = Debug|x86
+		{71BD4B99-D9F4-4E29-8EF9-B4BB86629CBC}.Release|x64.ActiveCfg = Release|x64
+		{71BD4B99-D9F4-4E29-8EF9-B4BB86629CBC}.Release|x64.Build.0 = Release|x64
+		{71BD4B99-D9F4-4E29-8EF9-B4BB86629CBC}.Release|x86.ActiveCfg = Release|x86
+		{71BD4B99-D9F4-4E29-8EF9-B4BB86629CBC}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
