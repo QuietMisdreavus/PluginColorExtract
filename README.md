@@ -21,3 +21,10 @@ to the version of Rainmeter you have installed in the Plugins directory, as desc
 [the documentation]: https://github.com/icesoldier/PluginColorExtract/blob/master/PluginColorExtract/Documentation/Usage.md
 [releases]: https://github.com/icesoldier/PluginColorExtract/releases
 [custom plugins]: http://docs.rainmeter.net/manual/plugins#Custom
+
+Shoutouts to Seth Thompson in [this Stack Overflow answer][SO answer] for sharing his implementation
+of the algorithm, and @arcanis for writing [colibri.js][], an implementation of the algorithm I
+could actually read and understand. This couldn't have happened without them.
+
+[SO answer]: http://stackoverflow.com/a/13675803
+[colibri.js]: https://github.com/arcanis/colibri.js/
