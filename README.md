@@ -18,7 +18,7 @@ Builds for 32- and 64-bit Rainmeter, as well as an example skin, are available u
 to the version of Rainmeter you have installed in the Plugins directory, as described in the
 [documentation][custom plugins].
 
-[the documentation]: https://github.com/icesoldier/PluginColorExtract/blob/master/PluginColorExtract/Documentation/Usage.md
+[the documentation]: https://github.com/icesoldier/PluginColorExtract/blob/master/Documentation/Usage.md
 [releases]: https://github.com/icesoldier/PluginColorExtract/releases
 [custom plugins]: http://docs.rainmeter.net/manual/plugins#Custom
 
