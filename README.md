@@ -12,7 +12,9 @@ different aspect ratio may lose some information in the processing.)
 
 ![Andrew Huang - You Are The Devil](http://i.imgur.com/2vh4Jmp.png) ![she - Orion](http://i.imgur.com/fHbVHAN.png)
 
-To write a skin using this plugin, please consult [the documentation][] for available options. An
-example skin is available in the repo.
+To write a skin using this plugin, please consult [the documentation][] for available options.
+Builds for 32- and 64-bit Rainmeter, as well as an example skin, are available under the
+[releases][].
 
 [the documentation]: https://github.com/icesoldier/PluginColorExtract/blob/master/PluginColorExtract/Documentation/Usage.md
+[releases]: https://github.com/icesoldier/PluginColorExtract/releases
