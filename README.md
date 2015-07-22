@@ -14,7 +14,10 @@ different aspect ratio may lose some information in the processing.)
 
 To write a skin using this plugin, please consult [the documentation][] for available options.
 Builds for 32- and 64-bit Rainmeter, as well as an example skin, are available under the
-[releases][].
+[releases][]. To install the plugin without installing the example skin, place the DLL corresponding
+to the version of Rainmeter you have installed in the Plugins directory, as described in the
+[documentation][custom plugins].
 
 [the documentation]: https://github.com/icesoldier/PluginColorExtract/blob/master/PluginColorExtract/Documentation/Usage.md
 [releases]: https://github.com/icesoldier/PluginColorExtract/releases
+[custom plugins]: http://docs.rainmeter.net/manual/plugins#Custom
