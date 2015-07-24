@@ -70,14 +70,18 @@ Friend Class Measure
             varColorAlpha = 0
         End If
 
+        'Get the raw string put there to see that the option is set in the first place
+        'e.g. if the ImagePath refers to a NowPlaying cover image, but the current track has no
+        'cover (or the player is unloaded), we still keep the reference to the parent class intact
         Dim PathOption As String = api.ReadPath("ImagePath", "")
+        Dim PathReference As String = api.ReadString("ImagePath", "", False)
         varParentName = api.ReadString("ParentMeasure", "", False)
 
-        If Not String.IsNullOrEmpty(PathOption) And Not String.IsNullOrEmpty(varParentName) Then
+        If Not String.IsNullOrEmpty(PathReference) And Not String.IsNullOrEmpty(varParentName) Then
             Rainmeter.API.Log(Rainmeter.API.LogType.Debug, "ColorExtract.dll: Both ImagePath and ParentMeasure are set, ignoring parent")
         End If
 
-        If Not String.IsNullOrEmpty(PathOption) Then
+        If Not String.IsNullOrEmpty(PathReference) Then
             If varParentMeasure Is Nothing Then
                 varParentMeasure = New Parent(varMeasureName, varSkin)
                 ParentsList.Add(varParentMeasure)
@@ -100,16 +104,6 @@ Friend Class Measure
     Friend Function Update() As Double
         If varParentMeasure IsNot Nothing AndAlso varParentMeasure.varMeasureName = Me.varMeasureName Then
             varParentMeasure.Update()
-        ElseIf varParentMeasure Is Nothing And Not String.IsNullOrEmpty(varParentName) Then
-            'In testing, if Dynamic Variables was set on the parent, then it wouldn't be able to create the Parent class
-            'on the first run, but would properly update after everything else had been loaded. Let's give the child
-            'measures a chance to find their parent after it's had a chance to get created.
-            For Each ParentCheck As Parent In ParentsList
-                If String.Format("[{0}]", ParentCheck.varMeasureName) = varParentName And ParentCheck.varSkin = varSkin Then
-                    varParentMeasure = ParentCheck
-                    Exit For
-                End If
-            Next
         End If
 
         Return 0.0
@@ -197,23 +191,25 @@ Friend Class Parent
         End SyncLock
 
         If Temp.varNeedsUpdating Then
-            If System.IO.File.Exists(Temp.varImagePath) Then
-                Dim ColorSet As Extraction
+            Dim ColorSet As Extraction
 
+            If System.IO.File.Exists(Temp.varImagePath) Then
                 Using FullImage As New Bitmap(Temp.varImagePath)
                     Using ReducedImage As New Bitmap(FullImage, 50, 50)
                         ColorSet = SelectColors(ReducedImage)
                     End Using
                 End Using
-
-                SyncLock Source.varLocker
-                    Source.varBackground = ColorSet.Background
-                    Source.varAccent1 = ColorSet.Accent1
-                    Source.varAccent2 = ColorSet.Accent2
-                End SyncLock
             Else
-                Rainmeter.API.Log(API.LogType.Error, "ColorExtract.dll: Image does not exist")
+                ColorSet.Background = Color.Black
+                ColorSet.Accent1 = Color.White
+                ColorSet.Accent2 = Color.White
             End If
+
+            SyncLock Source.varLocker
+                Source.varBackground = ColorSet.Background
+                Source.varAccent1 = ColorSet.Accent1
+                Source.varAccent2 = ColorSet.Accent2
+            End SyncLock
         End If
 
         SyncLock Source.varLocker
