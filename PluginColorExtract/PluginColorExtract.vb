@@ -26,6 +26,12 @@ Friend Enum ColorType
     Accent2
 End Enum
 
+Friend Structure ColorSet
+    Public Background As Color
+    Public Accent1 As Color
+    Public Accent2 As Color
+End Structure
+
 Friend Class Measure
 
     Friend Shared ParentsList As New List(Of Parent)
@@ -191,7 +197,7 @@ Friend Class Parent
         End SyncLock
 
         If Temp.varNeedsUpdating Then
-            Dim ColorSet As Extraction
+            Dim ColorSet As ColorSet
 
             If System.IO.File.Exists(Temp.varImagePath) Then
                 Using FullImage As New Bitmap(Temp.varImagePath)
@@ -219,14 +225,8 @@ Friend Class Parent
 
 #Region "Color Extract Helpers"
 
-    Private Structure Extraction
-        Public Background As Color
-        Public Accent1 As Color
-        Public Accent2 As Color
-    End Structure
-
-    Private Shared Function SelectColors(pImage As Bitmap) As Extraction
-        Dim ret As Extraction
+    Private Shared Function SelectColors(pImage As Bitmap) As ColorSet
+        Dim ret As ColorSet
 
         Const CandidateDiffBackground As Double = 0.3
         Const MinDiffBackground As Double = 0.4
