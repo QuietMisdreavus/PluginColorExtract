@@ -1,5 +1,5 @@
 ﻿'PluginColorExtract - Rainmeter plugin to extract interface colors from an image
-'Copyright (C) 2015 Bryan "icesoldier" Mitchell
+'Copyright (C) 2015 QuietMisdreavus
 
 'This program is free software; you can redistribute it and/or modify
 'it under the terms of the GNU General Public License as published by

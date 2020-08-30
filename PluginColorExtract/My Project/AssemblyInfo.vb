@@ -12,7 +12,7 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyDescription("")> 
 <Assembly: AssemblyCompany("")> 
 <Assembly: AssemblyProduct("Rainmeter")> 
-<Assembly: AssemblyCopyright("© 2015 - Bryan Mitchell")> 
+<Assembly: AssemblyCopyright("© 2015 - Victoria Mitchell")> 
 <Assembly: AssemblyTrademark("")> 
 
 <Assembly: ComVisible(False)> 

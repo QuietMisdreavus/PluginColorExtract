@@ -1,5 +1,5 @@
 ﻿'  Copyright (C) 2011 Birunthan Mohanathas
-'  VB.NET implementation (C) 2015 Bryan Mitchell
+'  VB.NET implementation (C) 2015 Victoria Mitchell
 
 '  This program is free software; you can redistribute it and/or
 '  modify it under the terms of the GNU General Public License
